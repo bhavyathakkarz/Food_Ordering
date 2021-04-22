@@ -23,14 +23,15 @@
               <div class="card p-4" style="border:none;">
                 <h2 class="py-4 font-weight-bold">Cart</h2>
               </div>
+              {% for menus in menu %}
               <div class="row" id="product1">
                 <div class="col-md-5 col-11 bg-light mx-auto d-flex justify-content-center align-items-center shadow">
-                  <img src="../static/images/menu4.jpg" class="img-fluid" style="height:90%;width:90% background-size: cover;">
+                  <img src="../static/images/{{menus.image}}" class="img-fluid" style="height:90%;width:90%;background-size:cover;">
                 </div>
                 <div class="col-md-7 col-11 mx-auto px-4 mt-2">
                   <div class="row d-flex justify-content-lg-end">
                     <div class="col-6 col-md-12 col-sm-11 cart_title ">
-                      <h1 class="product_name mb-4 ">Organic Salad</h1>
+                      <h1 class="product_name mb-4 ">{{menus.name}}</h1>
                       <p>Ingredients</p>
                       <p>Salad</p>
                     </div>
@@ -48,15 +49,16 @@
                       <button class="btn btn-dark"><i class="far fa-heart"></i>Wishlist</button>
                     </div>
                     <div class="col-lg-4 col-12 col-md-12 d-flex justify-content-end justify-content-sm-center align-items-sm-center">
-                      <h3>$<span id="quantity_price">0.00</span></h3>
+                      <h3>$<span id="quantity_price">{{menus.price}}</span></h3>
                     </div>
                   </div>
                 </div>
               </div>
               <hr/>
-              <div class="row" id="product2">
+              {% endfor %}
+              <!-- <div class="row" id="product2">
                 <div class="col-md-5 col-11 bg-light mx-auto d-flex justify-content-center align-items-center shadow">
-                  <img src="../static/images/menu4.jpg" class="img-fluid" style="height:90%;width:90% background-size: cover;">
+                  <img src="../static/images/menu4.jpg" class="img-fluid" style="height:90%;width:90%;background-size: cover;">
                 </div>
                 <div class="col-md-7 col-11 mx-auto px-4 mt-2">
                   <div class="row d-flex justify-content-lg-end">
@@ -83,7 +85,7 @@
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
             <div class="col-md-12 col-lg-4 col-11 mx-auto main_cart ml-3 mb-lg-0 mb-5">
               <div class="card bg-white shadow">
