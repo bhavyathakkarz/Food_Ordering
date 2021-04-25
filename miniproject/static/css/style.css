@@ -3,7 +3,7 @@
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-
+    
 }
 .banner{
     position: relative;
@@ -372,6 +372,4 @@ header{
         margin-top: 25px;
     }
 
-.quant_btn:active{
-    outline: none;
 }

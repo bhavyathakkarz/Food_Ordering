@@ -13,16 +13,14 @@
 </head>
 <body style="background-color: rgba(0,0,0,0.7);">
     <header>
-        <a href="#" class="logo" style="font-size: 3.3rem!important;">Food</a>
+        <a href="#" class="logo" style="font-size: 3.3rem!important;">Welcome {{cusname}}</a>
         <div class="menuToggle active" onclick="toggleMenu();"></div>
         <ul class="nav" style="font-size: 1.5rem!important;">
             <li><a href="#banner">Home</a></li>
-            <li><a href="#about">About</a></li>
             <li><a href="#menu">Menu</a></li>
-            <li><a href="#expert">Expert</a></li>
-            <li><a href="#testimonals">Testimonals</a></li>
+            <li><a href="#">Cart</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li><a href="/login">Signup</a></li>
+            <li><a href="/logout">Logout</a></li>
         </ul>
     </header>
     <section class="banner" id="banner">
@@ -32,7 +30,7 @@
             <a href="#menu" class="button">ORDER NOW</a>
         </div>
     </section>
-    <section class="about" id="about">
+    <!-- <section class="about" id="about">
         <div class="row">
             <div class="col50">
                 <h2 class="titletext">About us</h2>
@@ -43,7 +41,7 @@
                     <img src="../static/images/img1.jpg">
                 </div>
             </div>
-         </div>
+         </div> -->
      </section>       
     <section class="menu" id="menu">
         <div class="title">
@@ -52,73 +50,75 @@
 
         </div>
         <div class="content">
+            {% for menus in menu %}
             <div class="box">
                 <div class="img">
-                    <img name="image" src="../static/images/menu1.jpg">
+                    <img name="image" src="../static/images/{{menus.image}}">
                 </div>
                 <div class="text" style="padding-left: 5px!important;">
-                    <h3 style="color: antiquewhite!important;">Special Salad</h3> 
-                    <h3 style="color: antiquewhite!important;">$4</h3>
-                    <a href="/login" target="_self"><button class="btn btn-light font-weight-bold" name="button" style="margin-bottom: 5px;">Buy Now</button></a>
+                    <h3 name="name" style="color: antiquewhite!important;">{{menus.name}}</h3> 
+                    <h3 name="price" style="color: antiquewhite!important;">${{menus.price}}</h3>
+                    <a href="/cart/{{menus.menu_id}}" target="_blank"><button class="btn btn-light font-weight-bold" name="button" style="margin-bottom: 5px;">Buy Now</button></a>
                 </div>
             </div>
-            <div class="box">
+            {% endfor %}
+            <!-- <div class="box">
                 <div class="img">
                     <img src="../static/images/menu2.jpg">
                 </div>
-                <div class="text" style="padding-left: 5px!important;">
-                    <h3 style="color: antiquewhite!important;">Special Soup</h2>  
-                    <h3 style="color: antiquewhite!important;">$6</h3>
-                    <a href="/login" target="_self"><button class="btn btn-light  font-weight-bold" style="margin-bottom: 5px;" >Buy Now</button></a>
+                <div class="text">
+                    <h2>Special Soup</h2>  
+                    <h3>$6</h3>
+                    <a href="/cart" target="_blank"><button class="btn btn-primary btn-outline-dark font-weight-bold">Buy Now</button></a>
                 </div>
             </div>
             <div class="box">
                 <div class="img">
                     <img src="../static/images/menu3.jpg">
                 </div>
-                <div class="text" style="padding-left: 5px!important;">
-                    <h3 style="color: antiquewhite!important;">Special Pasta</h2>
-                    <h3 style="color: antiquewhite!important;">$10</h3>
-                    <a href="/login" target="_self"><button class="btn btn-light  font-weight-bold" style="margin-bottom: 5px;">Buy Now</button></a>             
+                <div class="text">
+                    <h2>Special Pasta</h2>
+                    <h3>$10</h3>
+                    <a href="/cart" target="_blank"><button class="btn btn-primary btn-outline-dark font-weight-bold">Buy Now</button></a>             
                 </div>
             </div>
             <div class="box">
                 <div class="img">
                     <img src="../static/images/menu4.jpg">
                 </div>
-                <div class="text" style="padding-left: 5px!important;">
-                    <h3 style="color: antiquewhite!important;">Organic Salad</h2>     
-                    <h3 style="color: antiquewhite!important;">$5</h3>
-                    <a href="/login" target="_self"><button class="btn btn-light  font-weight-bold" style="margin-bottom: 5px;">Buy Now</button></a>     
+                <div class="text">
+                    <h2>Organic Salad</h2>     
+                    <h3>$5</h3>
+                    <a href="/cart"><button class="btn btn-primary btn-outline-dark font-weight-bold">Buy Now</button></a>     
                 </div>
             </div>
             <div class="box">
                 <div class="img">
                     <img src="../static/images/menu5.jpg">
                 </div>
-                <div class="text" style="padding-left: 5px!important;">
-                    <h3 style="color: antiquewhite!important;">Special Diet-Soup</h2>
-                    <h3 style="color: antiquewhite!important;">$3</h3>
-                    <a href="/login" target="_self"><button class="btn btn-light  font-weight-bold" style="margin-bottom: 5px;">Buy Now</button></a>
+                <div class="text">
+                    <h2>Special Diet-Soup</h2>
+                    <h3>$3</h3>
+                    <a href="/cart"><button class="btn btn-primary btn-outline-dark font-weight-bold">Buy Now</button></a>
                 </div>
             </div>
             <div class="box">
                 <div class="img">
                     <img src="../static/images/menu6.jpg">
                 </div>
-                <div class="text" style="padding-left: 5px!important;">
-                    <h3 style="color: antiquewhite!important;">Special Italian-Salad</h3>
-                    <h3 style="color: antiquewhite!important;">$7</h3>
-                    <a href="/login" target="_self"><button class="btn btn-light font-weight-bold" style="margin-bottom: 5px;">Buy Now</button></a>
+                <div class="text">
+                    <h3>Special Italian-Salad</h3>
+                    <h3>$7</h3>
+                    <a href="/cart"><button class="btn btn-primary btn-outline-dark font-weight-bold">Buy Now</button></a>
                 </div>
-            </div>     
+            </div>      -->
         </div>
         <div class="title">
             <a href="#" class="button">View All</a>
         </div>
     </section>
     
-    <section class="expert" id="expert">
+    <!-- <section class="expert" id="expert">
         <div class="title">
             <h2 class="titletext">Our Experts</h2>
             <p>Here are our panel of Experts who make you daily happy with their receipe.</p>
@@ -157,8 +157,8 @@
                 </div>
             </div>
         </div>
-    </section>
-    <section class="testimonals" id="testimonals">
+    </section> -->
+    <!-- <section class="testimonals" id="testimonals">
         <div class="title white">
             <h2 class="titletext">Reviews About Us</h2>
             <p>This are our family who wrote geniune things about us after having our dishes.</p>
@@ -195,15 +195,15 @@
                 </div>
             </div>
         </div>
-    </section>
-    <!-- <section class="contact" id="contact">
+    </section> -->
+    <section class="contact" id="contact">
         <div class="title">
             <h2 class="titletext">Contact us</h2>
             <p>We are available 24x7 hrs.Feel free to contact us at any time,will be happy to serve u all.</p>
         </div>
         <div class="contactform">
             <h3>Send Message</h3>
-            <form action="/" method="post">
+            <form action="/userhome1" method="post">
             <div class="inputbox">
               NAME:  <input type="text" placeholder="George Plessis" name="name" required>
             </div>
@@ -218,7 +218,7 @@
             </div>  
             </form>       
         </div>
-    </section> -->
+    </section>
     <div class="copyright">
         <p>Copyright 2021 &copy; <a href="#">FoodCafe</a>.All Right Reserved</p>
     </div>

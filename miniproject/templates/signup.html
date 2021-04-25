@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>SignUp</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <style>
+        body{
+            background: url("../static/images/bg2.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+         .container{
+            display: flex;
+            justify-content: center;
+        }
+        .container1{
+            margin-top: 50px;
+            width:430px;
+            border-radius: 20px;
+            padding-left: 20px;
+            padding-right: 20px;
+            padding-bottom: 10px;
+            background-color:azure;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.88) ;
+        }
+a{
+    color:#ff0158;
+    font-weight: 600;
+    font-size: 1.5em;
+}
+p{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 900;
+    font-size: 1.53;
+    color:darkmagenta;
+}
+span{
+    font-weight: 800;
+    font-size: 1.3em;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: darkmagenta;
+}
+h1{
+    text-align: center;
+    color: #ff0158;
+}
+#submit{
+    border-radius: 6px;
+    border: 2px solid white ;
+    width: 30%;
+    font-weight: 900;
+    font: 1em sans-serif;
+    background-color: #ff0158;
+    color:#fff;
+}
+#submit:hover{
+    border-radius: 6px;
+    border: 2px solid white ;
+    width: 50%;
+    font-weight: 900;
+    font: 1em sans-serif;
+    background-color: blue;
+    letter-spacing: 5px;
+    color:#fff;
+
+}
+/* body{
+    background: url(meet.jpg);
+    background-size: cover;
+}     */
+    </style>
+    <script>
+        function Validateform(){
+            var name=document.getElementById("name");
+            if(name.value.length<5){
+                alert("name should be minimum 6 characters");
+                return false;
+            }
+            var username=document.getElementById("username");
+            if(username.value.trim()==""){
+                alert("username should not be blank");
+                return false;
+            }
+            if(username.value.length<7){
+                alert("username should be minimum 7 characters");
+                return false;
+            }
+            if(username.value.length>13){
+                alert("username should be maximum 13 characters");
+                return false;
+            }
+            var Password=document.getElementById("password");
+            var CPassword=document.getElementById("cpassword");
+             if(Password.value.trim()==""){
+                alert("Password should not be blank");
+                return false;
+            }
+             if(Password.value.length<5){
+                alert("Password should be minimum 5 characters");
+                return false;
+            }
+             if(Password.value.length>12){
+                alert("Password should be maximum 12 characters");
+                return false;
+            }
+            if(Password.value!=CPassword.value){
+                alert("Passwords are not matching");
+                return false;
+            }
+            var email=document.getElementById("email").value;
+             if(email.indexOf('@')<=0){
+                alert("invalid @ position");
+                return false;
+            }
+             if((email.charAt(email.length-4)!='.') && (email.charAt(email.length-3)!='.')){
+                alert("invalid . position");
+                return false;
+            }
+            var mobileno=document.getElementById("mobile_no").value;
+            if(mobileno==""){
+                alert("enter your mobile number");
+                return false;
+            }
+            if(isNaN(mobileno)){
+                alert("only numeric digits allowed");
+                return false;
+            }
+            if(mobileno.length!=10){
+                alert("mobile number should be 10 digits");
+                return false;
+            }
+            var address=document.getElementById("address").value;
+            if(address==""){
+                alert("enter your residing address");
+                return false;
+            }
+            else{
+                alert("your data has been validated");
+                return true;
+            }
+        }
+    </script>
+    <title>login form</title>
+</head>
+<body>
+    <div class="container">
+    <form onsubmit="return Validateform();" action="/registerNext" method="post">
+        <div class="container1">
+        <h1>SignUp</h1>
+        <span>Name:     </span><input type="text" id="name" name="name" required>
+        <br>
+        <br>
+       <span> Username: </span><input type="text" id="username" name="username" required>
+        <br>
+        <br>
+        <span>Password: </span><input type="password" id="password" name="password" required>
+        <br>
+        <br>
+        <span>Confirm:  </span><input type="password" id="cpassword" name="cpassword" required>
+        <br>
+        <br>
+        <span>Email:    </span><input type="text" id="email" name="email" required>
+        <br>
+        <br>
+       <span> MobileNo: </span><input type="text" id="mobile_no" name="mobile_no" required>
+        <br>
+        <br>
+        <span>Address:  </span><textarea id="address" rows="10" cols="30" name="address"required></textarea>
+        <br>
+        <br>
+        <a href="/login" target="_blank"><button class="btn-outline-danger" type="submit"style="width: 150px;">Submit</button></a>
+        </div>
+        </form>
+        </div>
+    
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body{
+            background: url("../static/images/bg2.jpg");
+            background-size: cover;
+        }
+        .container1{
+            margin-top: 100px;
+            position: relative;
+            top:100px;
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container{
+            border: 3px ;
+            padding:20px ;
+            background-color:#fff;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.88) ;
+            border-radius: 20px;
+        }
+        h1{
+            text-align: center;
+            color:#ff0158;
+        }
+        input[type="text"],[type="password"]{
+            width: 80%;
+            border: 1px solid #555;
+            padding: 10px;
+            color:#111;
+            font-size: 15px;
+            font-weight: 300;
+        }
+        input[type="submit"]{
+        font-size: 1em;
+        color: #fff;
+        background-color: #ff0158;
+        text-decoration: none;
+        letter-spacing: 2px;
+        font-weight: 500;
+        cursor: pointer;
+        border: none;
+        border-radius: 6px;
+
+}
+input[type="submit"]:hover{
+
+    background-color: blue;
+    letter-spacing: 5px;
+}
+a{
+    color:#ff0158;
+    font-weight: 600;
+    font-size: 1.5em;
+}
+p{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: 900;
+    font-size: 1.53;
+    color:darkmagenta;
+}
+span{
+    font-weight: 800;
+    font-size: 1.3em;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: darkmagenta;
+}
+       
+    </style>
+    <!-- <script>
+        function Validateform(){
+            var username=document.getElementById("user_name");
+            
+            if(username.value.trim()==""){
+                alert("username should not be blank");
+                
+                
+                return false;
+            }
+            else if(username.value.length<7){
+                alert("username should be minimum 7 characters");
+               
+                return false;
+            }
+            else if(username.value.length>13){
+                alert("username should be maximum 13 characters");
+            
+                return false;
+            }
+            
+            var Password=document.getElementById("password");
+            
+            
+             if(Password.value.trim()==""){
+                alert("Password should not be blank");
+                
+                return false;
+            }
+             if(Password.value.length<5){
+                alert("Password should be minimum 5 characters");
+               
+                return false;
+            }
+             if(Password.value.length>12){
+                alert("Password should be maximum 12 characters");
+            
+                return false;
+            }
+            else{
+                alert("your data has been validated");
+                return true;
+            }
+        }
+    </script> -->
+    <title>login form</title>
+</head>
+<body>
+    <div class="container1">
+    <form action="/loginNext" method="post" >
+        <div class="container">
+        <h1>Login Page</h1>
+       <span> Username: </span><input type="text" id="username" name="username" required = "true">
+        <br>
+        <br>
+      <span>  Password: </span><input type="password" id="password" name="password" required>
+        <br>
+        <br>
+        <button type="submit" class="btn btn-primary" value="submit">Login</button>
+        <p>Dont have an account? </p>
+        <a href="/signup">Sign up</a>
+        </div>
+        </form>
+        </div>
+    
+</body>
+</html>
