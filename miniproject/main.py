@@ -25,6 +25,12 @@ class Registers(db.Model):
     email=db.Column(db.String(80),  nullable=False)
     mobile_no=db.Column(db.String(80), unique=True, nullable=False)
     address=db.Column(db.Text(200),  nullable=False)
+
+class Orders(db.Model):
+    ohash = db.Column(db.Integer,primary_key=True, autoincrement=True)
+    cid = db.Column(db.Integer, db.ForeignKey('Registers.cid'), nullable=False)
+    items = db.Column(db.String(250), nullable=False)
+    tprice=db.Column(db.Integer, nullable=False)
     
 @app.route("/signup")
 def signup():
@@ -99,14 +105,88 @@ def userhome1():
         db.session.commit()
     return render_template('userhome.html',cusname=customer.name,menu=menu)
 
-# @app.route("/cart")
-# def usercart():
-#     return render_template("cart.html",menu=menu)
 
-@app.route("/cart/<int:id>",methods=['GET','POST'])
-def cart(id):
-    menu=Menu.query.filter_by(menu_id=id)
+# @app.route('/userorders',methods=['GET','POST'])
+# def userorders():
+# 	if not session.get('username'):
+# 		return redirect(request.url_root)
+# 	username=session['username']
+# 	customer  = Registers.query.filter(Customer.username == username).first()
+# 	cid=customer.cid
+# 	myorders = Orders.query.filter(Orders.cid == cid)
+
+# 	# mycustomer=Customer.query.filter(Customer.cid==myorders.cid)
+# 	# iuour = orders.query.join(items, orders.iid==items.iid).add_columns(users.userId, users.name, users.email, friends.userId, friendId).filter(users.id == friendships.friend_id).filter(friendships.user_id == userID).paginate(page, 1, False)
+		
+# 	return render_template('userorders.html',cusname=customer.cname,myorders=myorders)
+
+# # @app.route("/cart")
+# # def usercart():
+# #     return render_template("cart.html",menu=menu)
+
+# @app.route('/restmenu', methods = ['GET','POST'])
+# def restmenu():
+# 	if not session.get('cmail'):
+# 		return redirect(request.url_root)
+
+# 	if request.method == "GET":
+# 		restid = request.args.get("restid")
+	
+# 	elif request.method == "POST":
+# 		restid = request.form['restid']
+
+# 	items = Items.query.filter(Items.rid == restid).all()
+# 	restad = Restadmin.query.filter(Restadmin.rid == restid).first()
+# 	return render_template('restmenu.html',restad=restad, restadmin=items)
+
+
+# @app.route('/payment', methods = ['GET','POST'])
+# def payment():
+# 	if not session.get('cmail'):
+# 		return redirect(request.url_root)
+# 	if request.method == "GET":
+# 		tprice = request.args.get("total")
+# 		items = request.args.get("items")
+# 		rid=request.args.get("restid")
+		
+	
+# 	elif request.method == "POST":
+# 		tprice=request.form['total']
+# 		items=request.form["items"]
+# 		rid=request.form['restid']
+
+# 	#//////////////////////////////////////////////////////////////////////////////////////// 
+# 	if(tprice=="0"):
+# 	# return (str(tprice=="0"))
+# 		return render_template('errorzero.html')	
+# 		# return redirect(url_for('restmenu'))
+# 		#////////////////////////////////////////////////////////////////////////////////////
+
+# 	cmail=session['cmail']
+# 	customer  = Customer.query.filter(Customer.cmail == cmail).first()
+# 	# cusid=Customer.cid
+
+# 	restadmin  = Restadmin.query.filter(Restadmin.rid == rid).first()
+# 	rname=restadmin.rname
+
+# 	ostatus="pending"
+
+# 	x={temp:items.count(temp) for temp in items}
+	
+# 	c=","
+# 	x.pop(c)
+
+# 	return render_template('payment.html', x=x , tprice=tprice, rname=rname ,items=items, rid=rid)
+
+
+@app.route("/cart",methods=['GET','POST'])
+def cart():
+    menu=Menu.query.filter_by().all()
     return render_template("cart.html",menu=menu)
+
+@app.route("/payment",methods=['GET','POST'])
+def payment():
+    return render_template("payment.html")
 
 @app.route('/logout')
 def logout():
