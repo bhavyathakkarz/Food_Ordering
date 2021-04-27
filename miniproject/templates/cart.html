@@ -12,7 +12,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <title>FoodCart</title>
+    <title>FoodMenu</title>
   </head>
   <body>
     <div class="container-fluid">
@@ -21,7 +21,7 @@
           <div class="row mt-5 gx-3">
             <div class="col-md-12 col-lg-8 col-11 mx-auto main_cart shadow mb-lg-0 mb-5">
               <div class="card p-4" style="border:none;">
-                <h2 class="py-4 font-weight-bold">Cart</h2>
+                <h2 class="py-4 font-weight-bold">Menu</h2>
               </div>
               {% for menus in menu %}
               <div class="row" id="product1">
@@ -37,9 +37,9 @@
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-11 ">
                         <ul class="pagination d-flex justify-content-end">
-                          <li class="page-item"><button class="page-link quant_btn" id="{{menus.menu_id}}" name="{{menus.menu_id}}" style="width:40px;background-color:black; color:white;" onclick="decrement('{{menus.menu_id}}q','{{menus.menu_id}}qp','{{menus.price}}');"><i class="fas fa-minus"></i></button></li>
+                          <li class="page-item"><button class="page-link quant_btn" id="{{menus.menu_id}}" name="{{menus.menu_id}}" style="width:40px;background-color:black; color:white;" onclick="decrement('{{menus.menu_id}}q','{{menus.menu_id}}qp','{{menus.price}}',this);"><i class="fas fa-minus"></i></button></li>
                           <li class="page-item"><input type="text" value="0" style="width:70px; height:37px; margin-left:0.5px;text-align: center;" id="{{menus.menu_id}}q" readonly></li>
-                          <li class="page-item"><button class="page-link quant_btn" id="{{menus.menu_id}}" name="{{menus.menu_id}}" style="width:40px; margin-left:0.3px;background-color:black; color:white;" onclick="increment('{{menus.menu_id}}q','{{menus.menu_id}}qp','{{menus.price}}');"><i class="fas fa-plus"></i></button></li>
+                          <li class="page-item"><button class="page-link quant_btn" id="{{menus.menu_id}}" name="{{menus.menu_id}}" style="width:40px; margin-left:0.3px;background-color:black; color:white;" onclick="increment('{{menus.menu_id}}q','{{menus.menu_id}}qp','{{menus.price}}',this);"><i class="fas fa-plus"></i></button></li>
                         </ul>
                     </div>
                   </div>
@@ -103,7 +103,7 @@
                 <div class="d-flex justify-content-between">
                   <h5>The Total Amount(including DC)</h5>
                   <h5>$<span id="total_amount" name="total_amount">0.00</span></h5>
-                  <input type="text" id="items" name="items" hidden="true"/>
+                  <input type="text" id="items" name="items"/>
                 </div>
                 <div class="justify-content-start">
                 <button class="btn btn-primary mt-3 ml-2 mb-5" onclick="checkout()" type="submit">Checkout</button>
@@ -118,7 +118,8 @@
       var ryt_amount=document.getElementById("ryt_amount");
       var dc=document.getElementById('dc');
       var total_amount=document.getElementById("total_amount");
-      const decrement=(quantity,quantity_price,mprice)=>{
+      var items_selected =[]; 
+      const decrement=(quantity,quantity_price,mprice,dec)=>{
         var quant=document.getElementById(quantity);
         var quantity_price=document.getElementById(quantity_price);
         if(quant.value<=0){
@@ -126,15 +127,28 @@
           alert("Quantity cannot be negative");
         }
         else{
+          var c_item=dec.id;
           quant.value=parseInt(quant.value)-1;
           quantity_price.innerHTML=parseInt(quantity_price.innerHTML)-parseInt(mprice);
           ryt_amount.innerHTML=parseInt(ryt_amount.innerHTML)-parseInt(mprice);
           total_amount.innerHTML=parseInt(ryt_amount.innerHTML)+parseInt(dc.innerHTML);
+          c=0;
+                 for (var i = items_selected.length - 1; i >= 0 && c==0; i--) 
+                 {
+                    if (items_selected[i] == c_item) 
+                    {
+                      items_selected.splice(i, 1);
+                        c=1;
+                    }
+                  
+                  }
+          console.log(items_selected);
+          document.getElementById("items").value=items_selected; 
           quant.style.backgroundColor = '#fff';
-          quant.style.color = '#000';
+          quant.style.color = '#000'; 
         }
       }
-      const increment=(quantity,quantity_price,mprice)=>{
+      const increment=(quantity,quantity_price,mprice,inc)=>{
         var quant=document.getElementById(quantity);
         var quantity_price=document.getElementById(quantity_price);
         if(quant.value>=5){
@@ -144,10 +158,15 @@
           quant.style.color = '#fff';
         }
         else{
+          // var c_item=event.srcElement.id;
+          var c_item=inc.id;
+          items_selected.push(c_item);
           quant.value=parseInt(quant.value)+1;
           quantity_price.innerHTML=parseInt(quantity_price.innerHTML)+parseInt(mprice);
           ryt_amount.innerHTML=parseInt(ryt_amount.innerHTML)+parseInt(mprice);
           total_amount.innerHTML=parseInt(ryt_amount.innerHTML)+parseInt(dc.innerHTML);
+          console.log(items_selected);
+          document.getElementById("items").value=items_selected;
         }
       }
       const removeitem=(quantity_price,products)=>{

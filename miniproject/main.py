@@ -120,73 +120,52 @@ def userhome1():
 		
 # 	return render_template('userorders.html',cusname=customer.cname,myorders=myorders)
 
-# # @app.route("/cart")
-# # def usercart():
-# #     return render_template("cart.html",menu=menu)
 
-# @app.route('/restmenu', methods = ['GET','POST'])
-# def restmenu():
-# 	if not session.get('cmail'):
-# 		return redirect(request.url_root)
+@app.route('/cart', methods = ['GET','POST'])
+def cart():
+	if not session.get('username'):
+		return redirect(request.url_root)
 
-# 	if request.method == "GET":
-# 		restid = request.args.get("restid")
-	
-# 	elif request.method == "POST":
-# 		restid = request.form['restid']
-
-# 	items = Items.query.filter(Items.rid == restid).all()
-# 	restad = Restadmin.query.filter(Restadmin.rid == restid).first()
-# 	return render_template('restmenu.html',restad=restad, restadmin=items)
+	menu = Menu.query.filter_by().all()
+	return render_template('cart.html',menu=menu)
 
 
-# @app.route('/payment', methods = ['GET','POST'])
-# def payment():
-# 	if not session.get('cmail'):
-# 		return redirect(request.url_root)
-# 	if request.method == "GET":
-# 		tprice = request.args.get("total")
-# 		items = request.args.get("items")
-# 		rid=request.args.get("restid")
+@app.route('/payment', methods = ['GET','POST'])
+def payment():
+	if not session.get('username'):
+		return redirect(request.url_root)
+	if request.method == "GET":
+		tprice = request.args.get("total_amount")
+		items = request.args.get("items")
 		
 	
-# 	elif request.method == "POST":
-# 		tprice=request.form['total']
-# 		items=request.form["items"]
-# 		rid=request.form['restid']
+	elif request.method == "POST":
+		tprice=request.form['total_amount']
+		items=request.form["items"]
 
-# 	#//////////////////////////////////////////////////////////////////////////////////////// 
-# 	if(tprice=="0"):
-# 	# return (str(tprice=="0"))
-# 		return render_template('errorzero.html')	
-# 		# return redirect(url_for('restmenu'))
-# 		#////////////////////////////////////////////////////////////////////////////////////
+	if(tprice=="0"):
+	# return (str(tprice=="0"))
+		return render_template('errorzero.html')	
+		# return redirect(url_for('restmenu'))
+		#////////////////////////////////////////////////////////////////////////////////////
 
-# 	cmail=session['cmail']
-# 	customer  = Customer.query.filter(Customer.cmail == cmail).first()
-# 	# cusid=Customer.cid
+	username=session['username']
+	customer  = Registers.query.filter(Registers.username == username).first()
+	cusid=customer.cid
 
-# 	restadmin  = Restadmin.query.filter(Restadmin.rid == rid).first()
-# 	rname=restadmin.rname
 
-# 	ostatus="pending"
-
-# 	x={temp:items.count(temp) for temp in items}
+	x={temp:items.count(temp) for temp in items}
 	
-# 	c=","
-# 	x.pop(c)
+	c=","
+	x.pop(c)
 
-# 	return render_template('payment.html', x=x , tprice=tprice, rname=rname ,items=items, rid=rid)
+	return render_template('payment.html', x=x , tprice=tprice,items=items)
 
 
-@app.route("/cart",methods=['GET','POST'])
-def cart():
-    menu=Menu.query.filter_by().all()
-    return render_template("cart.html",menu=menu)
 
-@app.route("/payment",methods=['GET','POST'])
-def payment():
-    return render_template("payment.html")
+# @app.route("/payment",methods=['GET','POST'])
+# def payment():
+#     return render_template("payment.html")
 
 @app.route('/logout')
 def logout():
