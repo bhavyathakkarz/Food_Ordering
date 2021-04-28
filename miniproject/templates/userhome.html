@@ -18,7 +18,8 @@
         <ul class="nav" style="font-size: 1.5rem!important;">
             <li><a href="#banner">Home</a></li>
             <li><a href="#menu">Menu</a></li>
-            <li><a href="#">Cart</a></li>
+            <li><a href="/showuserprofile">Profile</a></li>
+            <li><a href="/userorders">My Orders</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="/logout">Logout</a></li>
         </ul>
@@ -205,13 +206,13 @@
             <h3>Send Message</h3>
             <form action="/userhome1" method="post">
             <div class="inputbox">
-              NAME:  <input type="text" placeholder="George Plessis" name="name" required>
+              NAME:  <input type="text" placeholder="George Plessis" name="name" value="{{cusname}}">
             </div>
             <div class="inputbox">
-                EMAIL ID: <input type="text" placeholder="georgeplessis453@gmail.com" name="email" required>
+                EMAIL ID: <input type="text" placeholder="georgeplessis453@gmail.com" name="email" value="{{cusemail}}">
             </div>
             <div class="inputbox">
-                WRITE US:  <textarea  placeholder="We are happy to take suggestions." name="content" required></textarea>
+                WRITE US:  <textarea  placeholder="We are happy to take suggestions." name="content" ></textarea>
               </div>
             <div class="inputbox">
                 <input type="submit" value="SEND">

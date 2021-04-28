@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>food</title>
+<meta name="description" content="">
+<meta name="author" content="">
+
+
+<link href="{{ url_for('static',filename = 'style.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ url_for('static',filename = 'bootstrap.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ url_for('static',filename = 'bootstrap.min.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ url_for('static',filename = 'default.css') }}" rel="stylesheet" type="text/css">
+<link href="{{ url_for('static',filename = 'nivo-lightbox.css') }}" rel="stylesheet" type="text/css">
+
+
+<link rel="stylesheet" type="text/css"  href="css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="fonts/font-awesome/css/font-awesome.css">
+
+
+<link href="https://fonts.googleapis.com/css?family=Raleway:300,400,500,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Dancing+Script:400,700" rel="stylesheet">
+
+
+<style>
+    
+     .bt{
+        background: url(bgp2.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 5px 0px;
+    z-index: 100000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+}
+ header .logo{
+     color: #fff;
+     font-weight: 900;
+     font-size: 50px;
+     text-decoration: none;
+ }
+ header .nav{
+     position: relative;
+     display: flex;
+     
+ }
+ header .nav li{
+     list-style: none;
+     margin-left: 40px;
+     text-decoration: none;
+ }
+
+ header .nav li a{
+     text-decoration: none;
+     font-weight: 400;
+     color:#ff0158;
+ }
+ header .nav li a:hover{
+     color:blue;
+ }
+ .agarwal{
+     margin-top: 80px;
+     padding: 25px;
+ }
+</style>
+</head>
+<body id="page-top" class="bt" data-spy="scroll">
+  <header>
+    <a href="#" class="logo" style="font-size: 3.3rem!important;color:#ff0158!important;">{{cusname}}</a>
+    <div class="menuToggle active" onclick="toggleMenu();"></div>
+    <ul class="nav" style="font-size: 1.5rem!important;color:#ff0158!important;">
+        <li><a href="/userhome1">Home</a></li>
+        <li><a href="/cart">Menu</a></li>
+        <li><a href="/showuserprofile">Profile</a></li>
+        <li><a href="/userorders">My Orders</a></li>
+        <!-- <li><a href="#contact">Contact</a></li> -->
+        <li><a href="/logout">Logout</a></li>
+    </ul>
+</header>
+<div class="agarwal">
+
+ <div class="intro" style="background-image:url({{url_for('static',filename='user1.jpg')}}); background-repeat:no-repeat;">
+  <div class="section-title text-center center">
+    <div class="overlay">
+      <br><br><br>
+      <h2 style="font-family: Lucida Console; color:#8B0000; text-align: center;">Customer-{{cusname}}</h2>
+     <p style="font-family: Lucida Console; color:black; text-align: center;  ">My Orders </p>
+      
+    </div>
+
+             <div class="menu-item" >
+            
+                <table style="margin-left:730px;">
+                   <col width="150">
+                   <col width="150">
+                   <col width="150">
+                   <col width="150">
+                  
+                   <tr>
+                    <td> <b> <h4 style=" color:#8B0000;">Order ID</h4></b>  </td>
+                    <td> <b><h4 style=" color:#8B0000;"> Items  </h4></b>  </td>
+                    <td> <b><h4 style=" color:#8B0000;"> Total Price</h4> </b>  </td>
+                     <td> &nbsp;&nbsp;&nbsp;&nbsp; </td>
+
+                   </td>
+                  {% for i in myorders %}
+
+          <!-- <form action="/acceptorreject" method="POST" id="meraform"> -->
+
+                   <tr>
+                      <td><h4>{{ i.ohash }}</h4></td>
+                      <td><h4>{{ i.items }}</h4></td>
+                      <td><h4>{{ i.tprice }}</h4></td>
+                     <td> &nbsp;&nbsp;&nbsp;&nbsp; </td>
+
+<!--                      <input type="text" id="ohash" name="ohash" value="{{i.ohash}}" hidden="true"  />
+
+                      <td> <button type="submit" class="btn btn-primary" name="acceptreject" value=accept onclick="">Accept
+                            </button>
+
+                       <button type="submit" class="btn btn-danger" name="acceptreject" value=reject onclick="">Reject
+                            </button>
+                       </td>     
+ -->                   </tr>
+        <!-- </form> -->
+
+
+                  {% endfor %}
+
+                </table>
+               
+
+
+                 
+                </div>
+        
+        <!-- </form> -->
+
+
+           
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- </header> -->
+
+
+
+<!-- Call Reservation Section -->
+
+</body>
+</html>

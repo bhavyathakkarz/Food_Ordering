@@ -7,20 +7,21 @@ db = SQLAlchemy(app)
 app.secret_key = 'make this hard to guess!'
 
 class Menu(db.Model):
-    menu_id=db.Column(db.Integer, primary_key=True)
+    menu_id=db.Column(db.Integer, primary_key=True,autoincrement=True)
     image=db.Column(db.String(120), unique=False, nullable=False)
     name=db.Column(db.String(80), unique=True, nullable=False)
     price=db.Column(db.Integer,unique=False, nullable=False)
 
 class Contacts(db.Model):
-    sr_no = db.Column(db.Integer, primary_key=True)
-    name=db.Column(db.String(80), unique=True, nullable=False)
-    email=db.Column(db.String(80), unique=True, nullable=False)
-    content=db.Column(db.Text(200), unique=True, nullable=False)
+    sr_no = db.Column(db.Integer, primary_key=True,autoincrement=True)
+    name=db.Column(db.String(80), unique=False)
+    email=db.Column(db.String(80), unique=False)
+    content=db.Column(db.Text(200), unique=False)
 
 class Registers(db.Model):
+    cid=db.Column(db.Integer, primary_key=True,autoincrement=True)
     name=db.Column(db.String(80),  nullable=False)
-    username=db.Column(db.String(80), unique=True, nullable=False,primary_key=True)
+    username=db.Column(db.String(80), unique=True, nullable=False)
     password=db.Column(db.String(80), nullable=False)
     email=db.Column(db.String(80),  nullable=False)
     mobile_no=db.Column(db.String(80), unique=True, nullable=False)
@@ -28,7 +29,7 @@ class Registers(db.Model):
 
 class Orders(db.Model):
     ohash = db.Column(db.Integer,primary_key=True, autoincrement=True)
-    cid = db.Column(db.Integer, db.ForeignKey('Registers.cid'), nullable=False)
+    cid = db.Column(db.Integer, db.ForeignKey('registers.cid'), nullable=False)
     items = db.Column(db.String(250), nullable=False)
     tprice=db.Column(db.Integer, nullable=False)
     
@@ -103,31 +104,32 @@ def userhome1():
         entry=Contacts(name=name,email=email,content=content)
         db.session.add(entry)
         db.session.commit()
-    return render_template('userhome.html',cusname=customer.name,menu=menu)
+    return render_template('userhome.html',cusname=customer.name,cusemail=customer.email,menu=menu)
 
 
-# @app.route('/userorders',methods=['GET','POST'])
-# def userorders():
-# 	if not session.get('username'):
-# 		return redirect(request.url_root)
-# 	username=session['username']
-# 	customer  = Registers.query.filter(Customer.username == username).first()
-# 	cid=customer.cid
-# 	myorders = Orders.query.filter(Orders.cid == cid)
+@app.route('/userorders',methods=['GET','POST'])
+def userorders():
+	if not session.get('username'):
+		return redirect(request.url_root)
+	username=session['username']
+	customer  = Registers.query.filter(Registers.username == username).first()
+	cid=customer.cid
+	myorders = Orders.query.filter(Orders.cid == cid)
 
-# 	# mycustomer=Customer.query.filter(Customer.cid==myorders.cid)
-# 	# iuour = orders.query.join(items, orders.iid==items.iid).add_columns(users.userId, users.name, users.email, friends.userId, friendId).filter(users.id == friendships.friend_id).filter(friendships.user_id == userID).paginate(page, 1, False)
+	# mycustomer=Customer.query.filter(Customer.cid==myorders.cid)
+	# iuour = orders.query.join(items, orders.iid==items.iid).add_columns(users.userId, users.name, users.email, friends.userId, friendId).filter(users.id == friendships.friend_id).filter(friendships.user_id == userID).paginate(page, 1, False)
 		
-# 	return render_template('userorders.html',cusname=customer.cname,myorders=myorders)
+	return render_template('userorders.html',cusname=customer.name,myorders=myorders)
 
 
 @app.route('/cart', methods = ['GET','POST'])
 def cart():
-	if not session.get('username'):
-		return redirect(request.url_root)
-
-	menu = Menu.query.filter_by().all()
-	return render_template('cart.html',menu=menu)
+    if not session.get('username'):
+        return redirect(request.url_root)
+    username=session['username']
+    customer  = Registers.query.filter(Registers.username == username).first()
+    menu = Menu.query.filter_by().all()
+    return render_template('cart.html',cusname=customer.name,menu=menu)
 
 
 @app.route('/payment', methods = ['GET','POST'])
@@ -143,7 +145,7 @@ def payment():
 		tprice=request.form['total_amount']
 		items=request.form["items"]
 
-	if(tprice=="0"):
+	if(tprice=="0" or tprice=="10"):
 	# return (str(tprice=="0"))
 		return render_template('errorzero.html')	
 		# return redirect(url_for('restmenu'))
@@ -151,21 +153,60 @@ def payment():
 
 	username=session['username']
 	customer  = Registers.query.filter(Registers.username == username).first()
-	cusid=customer.cid
+	cusname=customer.name
 
 
 	x={temp:items.count(temp) for temp in items}
-	
 	c=","
 	x.pop(c)
 
-	return render_template('payment.html', x=x , tprice=tprice,items=items)
+	return render_template('payment.html', x=x ,cusname=cusname, tprice=tprice,items=items)
+
+@app.route('/submitorder', methods = ['GET','POST'])
+def submitorder():
+	if not session.get('username'):
+		return redirect(request.url_root)
+	if request.method == "GET":
+		tprice = request.args.get("tprice")
+		items = request.args.get("items")
+		
+	
+	elif request.method == "POST":
+		tprice=request.form['tprice']
+		items=request.form["items"]
+		
+
+	username=session['username']
+	customer  = Registers.query.filter(Registers.username == username).first()
+
+	# restadmin  = Restadmin.query.filter(Restadmin.rid == rid).first()
+	# rid=restadmin.rid
+
+	# ostatus="pending"
+
+	
+	orders = Orders(cid=customer.cid,items=items,tprice=tprice,)
+	if orders :
+
+		db.session.add(orders)
+		db.session.commit()
+
+		# return redirect(url_for('userorders'))
+		return render_template('lastpage.html',cusname=customer.name)
 
 
+	return render_template('payment.html')
 
-# @app.route("/payment",methods=['GET','POST'])
-# def payment():
-#     return render_template("payment.html")
+@app.route('/showuserprofile', methods = ['GET','POST'])
+def showuserprofile():
+	if not session.get('username'):
+		return redirect(request.url_root)
+	username=session['username']
+
+	customer=Registers.query.filter(Registers.username==username).first()
+	# customer.cpassword=cpassword
+	# db.session.commit()
+	return render_template('showuserprofile.html',cusname=customer.name,cusinfo = customer)
 
 @app.route('/logout')
 def logout():

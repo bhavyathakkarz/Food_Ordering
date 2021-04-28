@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Conc</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<style>
+    header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 50px 100px;
+    z-index: 100000;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.bt{
+        background: url(bgp2.jpg);
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+header .logo{
+     color: #fff;
+     font-weight: 900;
+     font-size: 50px;
+     text-decoration: none;
+ }
+ header .nav{
+     position: relative;
+     display: flex;
+     
+ }
+ header .nav li{
+     list-style: none;
+     margin-left: 30px;
+     text-decoration: none;
+ }
+ header .nav li a{
+     text-decoration: none;
+     font-weight: 100;
+     color:blue;
+ }
+ header .nav li a:hover{
+     color:#ff0158;
+ }
+ .d1{
+        display: flex;
+        text-align: center;
+        justify-content: center;
+        margin-top: 220px;
+        padding-top: 70px;
+    
+    }
+</style>
+</head>
+<body>
+    <header>
+        <a href="#" class="logo" style="font-size: 3.3rem!important;color:blue!important;">{{cusname}}</a>
+        <div class="menuToggle active" onclick="toggleMenu();"></div>
+        <ul class="nav" style="font-size: 1.5rem!important;color:blue!important;">
+            <li><a href="/userhome1">Home</a></li>
+            <li><a href="/cart">Menu</a></li>
+            <li><a href="/showuserprofile">Profile</a></li>
+            <li><a href="/userorders">My Orders</a></li>
+            <li><a href="/logout">Logout</a></li>
+        </ul>
+    </header>
+    <div class="d1">
+        <div class="intro qwerty" >
+            <div class="overlay">
+              <div class="container">
+                 <!-- <div class="jumbotron"> -->
+                <div class="row">
+                  <div class="intro-text">
+                    <!-- <h2 style="color: orange">Thank You for ordering the food.</h2>
+                   <h3 style="color: pink">Please visit again..!</h3> -->
+                   <h2 style="color: orange">Please Select some item first to order...!</h2>
+                   <!-- <h6>Please visit again..!</h6> -->
+        
+                    <!-- <a href="/userhome1" class="btn btn-custom btn-lg page-scroll">Click here to order again!</a> </div> -->
+                         <!-- <form action="/userorders" method="POST">
+                  </br></br>
+                  <button type="submit" class="btn btn-success" value=”submit”>View Order Status</button>
+                        </form> -->
+        
+                               <!-- <form action="/userhome1" method="POST"> -->
+                  </br></br>
+                  <a href="/userhome1"><button type="submit" class="btn btn-primary" value=”submit”>Go Back</button></a>
+                        <!-- </form> -->
+        
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    </div>
+</body>
