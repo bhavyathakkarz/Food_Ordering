@@ -17,12 +17,12 @@
         display: flex;
         text-align: center;
         justify-content: center;
-        margin-top: 70px;
+        margin-top: 170px;
         padding-top: 70px;
     
     }
      .bt{
-        background: url(bgp2.jpg);
+        background-image: url("../static/images/pay.jpg");
         background-repeat: no-repeat;
         background-size: cover;
     }
@@ -59,7 +59,7 @@
  header .nav li a{
      text-decoration: none;
      font-weight: 400;
-     color:blue;
+     color:antiquewhite;
  }
  header .nav li a:hover{
      color:#ff0158;
@@ -68,9 +68,9 @@
 </head>
 <body id="page-top" class="bt" data-spy="scroll">
   <header>
-    <a href="#" class="logo" style="font-size: 3.3rem!important;color:blue!important;">{{cusname}}</a>
+    <a href="#" class="logo" style="font-size: 3.3rem!important;color:antiquewhite!important;">{{cusname}}</a>
     <div class="menuToggle active" onclick="toggleMenu();"></div>
-    <ul class="nav" style="font-size: 1.5rem!important;color:blue!important;">
+    <ul class="nav" style="font-size: 1.5rem!important;color:antiquewhite!important;">
         <li><a href="/userhome1">Home</a></li>
         <li><a href="/cart">Menu</a></li>
         <li><a href="/showuserprofile">Profile</a></li>
@@ -89,14 +89,14 @@
         <div class="col-xs-4 col-xs-offset-4">
              <h2 style="font-family: Lucida Console; color:#8B0000; background-color:#DCDCDC">Your Cart</h2>
              <div class="menu-item">
-                <table style=" text-align: center; ">
+                <table style=" text-align: center; color: antiquewhite;">
                    <col width="150">
                    <col width="150">
                    <col width="150">
                    <col width="150">
                    <tr>
-                    <td> <b style="color:black;"> Item ID </b>  </td>
-                    <td>  <b style="color:black;">Item Quantity </b> </td>
+                    <td> <b> Item ID </b></td>
+                    <td>  <b>Item Quantity </b> </td>
                   </tr>
                    </td>
                   {% for key,val in x.items() %}
@@ -114,7 +114,7 @@
                <form action="/submitorder" method="POST">
                  
               </br> </br>
-                            <div class="form-group"  style="color:black;">
+                            <div class="form-group"  style="color:antiquewhite">
                                 Total Price<input type="text" class="form-control" id="tprice" name="tprice" value="{{tprice}}" readonly>
                             </div>
 
